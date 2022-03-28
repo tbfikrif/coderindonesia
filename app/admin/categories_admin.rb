@@ -1,21 +1,21 @@
-Trestle.resource(:posts) do
+Trestle.resource(:categories) do
   menu do
-    item :posts, icon: "fa fa-star"
+    item :categories, icon: 'fa fa-star'
   end
 
   # Customize the table columns shown on the index view.
   #
   table do
-    column :title
-    column :content
+    column :name
+    column :description
     actions
   end
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |post|
-    text_field :title
-    text_field :content
+  form do |_category|
+    text_field :name
+    text_field :description
   end
 
   # By default, all parameters passed to the update and create actions will be
@@ -26,6 +26,6 @@ Trestle.resource(:posts) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:post).permit(:name, ...)
+  #   params.require(:category).permit(:name, ...)
   # end
 end

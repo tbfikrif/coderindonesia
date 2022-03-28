@@ -30,6 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/public/uploads
 /config/database.yml
-
+/db/schema.rb
 .env
+.rubocop.yml

@@ -6,8 +6,8 @@ Trestle.resource(:users, model: User, scope: Auth) do
   end
 
   table do
-    column :avatar, header: false do |user|
-      avatar_for(user)
+    column :avatar, header: false, class: "poster-column" do |user|
+      admin_link_to(image_tag(user.avatar_url(:thumb), class: "poster"), user) if user.avatar.present?
     end
     column :email, link: true
     actions do |a|
@@ -17,6 +17,13 @@ Trestle.resource(:users, model: User, scope: Auth) do
 
   form do |user|
     text_field :email
+    text_field :username
+    file_field :avatar
+
+    row do 
+      col(sm: 6) { text_field :first_name }
+      col(sm: 6) { text_field :last_name }
+    end
 
     row do
       col(sm: 6) { password_field :password }

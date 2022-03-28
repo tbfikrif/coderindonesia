@@ -7,6 +7,11 @@ Trestle.resource(:account, model: User, scope: Auth, singular: true) do
 
   form do |user|
     text_field :email
+    text_field :username
+    row do 
+      col(sm: 6) { text_field :first_name }
+      col(sm: 6) { text_field :last_name }
+    end
 
     row do
       col(sm: 6) { password_field :password }
