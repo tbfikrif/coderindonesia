@@ -16,4 +16,10 @@ class User < ApplicationRecord
 
   enumerize :programming_skill, in: { beginner: 1, intermediate: 2, advanced: 3, professional: 4, expert: 5 }
   enumerize :user_type, in: { starter: 1, basic: 2, pro: 3 }, default: :starter
+
+  attr_reader :token
+
+  def on_jwt_dispatch(token, _payload)
+    @token = token
+  end
 end
