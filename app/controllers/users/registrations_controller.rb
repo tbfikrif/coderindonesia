@@ -10,18 +10,21 @@ module Users
 
     def register_success
       render json: {
-        success: true,
-        message: 'Register success.',
+        message: I18n.t('devise.registrations.signed_up'),
         id: current_user.id,
         email: current_user.email,
         first_name: current_user.first_name,
+        user_type: current_user.user_type.text,
         'token-type': 'Bearer',
         'access-token': current_user.token
       }, status: :ok
     end
 
     def register_failed
-      render json: { message: 'Signed up failure.', error: resource.errors.messages }, status: :bad_request
+      render json: {
+        message: I18n.t('devise.registrations.signed_up_failure'),
+        error: resource.errors.messages
+      }, status: :bad_request
     end
   end
 end

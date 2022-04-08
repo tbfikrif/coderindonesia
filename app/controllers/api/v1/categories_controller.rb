@@ -15,15 +15,13 @@ module Api
 
         if category.save
           render json: {
-            success: true,
-            messages: 'Berhasil menambahkan data'
-          }
+            messages: I18n.t('activerecord.success.messages.create', model: category.model_name.human)
+          }, status: :ok
         else
           render json: {
-            success: false,
-            messages: 'Gagal menambahkan data',
+            messages: I18n.t('activerecord.errors.messages.create', model: category.model_name.human),
             error: category.errors.full_messages
-          }
+          }, status: :unprocessable_entity
         end
       end
 
@@ -34,30 +32,26 @@ module Api
       def update
         if @category.update(category_params)
           render json: {
-            success: true,
-            messages: 'Berhasil mengubah data'
-          }
+            messages: I18n.t('activerecord.success.messages.update', model: @category.model_name.human)
+          }, status: :ok
         else
           render json: {
-            success: false,
-            messages: 'Gagal mengubah data',
+            messages: I18n.t('activerecord.errors.messages.update', model: @category.model_name.human),
             error: @category.errors.full_messages
-          }
+          }, status: :unprocessable_entity
         end
       end
 
       def destroy
         if @category.destroy
           render json: {
-            success: true,
-            messages: 'Berhasil menghapus data'
-          }
+            messages: I18n.t('activerecord.success.messages.destroy', model: @category.model_name.human)
+          }, status: :ok
         else
           render json: {
-            success: false,
-            messages: 'Gagal menghapus data',
+            messages: I18n.t('activerecord.errors.messages.destroy', model: @category.model_name.human),
             error: @category.errors.full_messages
-          }
+          }, status: :unprocessable_entity
         end
       end
 
@@ -65,6 +59,10 @@ module Api
 
       def set_category
         @category = Category.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: {
+          messages: I18n.t('activerecord.errors.messages.not_found', model: Category.model_name.human)
+        }, status: :not_found
       end
 
       def category_params

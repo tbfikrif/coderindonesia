@@ -1,0 +1,12 @@
+id:
+  activerecord:
+    models:
+      user: 'Pengguna'
+  attributes:
+    programming_skill: 'Skill Pemrograman'
+  enumerize:
+    user:
+      user_type:
+        starter: 'Pemula'
+        basic: 'Dasar'
+        pro: 'Profesional'
