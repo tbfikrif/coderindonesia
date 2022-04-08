@@ -5,14 +5,19 @@ module Users
     private
 
     def respond_with(_resource, _opts = {})
-      render json: {
-        message: 'Logged.',
-        id: current_user.id,
-        email: current_user.email,
-        first_name: current_user.first_name,
-        'token-type': 'Bearer',
-        'access-token': current_user.token,
-      }, status: :ok
+      if current_user
+        render json: {
+          success: true,
+          message: 'Login success.',
+          id: current_user.id,
+          email: current_user.email,
+          first_name: current_user.first_name,
+          'token-type': 'Bearer',
+          'access-token': current_user.token
+        }, status: :ok
+      else
+        render json: { success: false, message: 'Invalid login credentials' }, status: :unauthorized
+      end
     end
 
     def respond_to_on_destroy
