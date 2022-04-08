@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist, authentication_keys: [:login]
 
   mount_uploader :avatar, AvatarUploader
 
@@ -18,8 +18,28 @@ class User < ApplicationRecord
   enumerize :user_type, in: { starter: 1, basic: 2, pro: 3 }, default: :starter
 
   attr_reader :token
+  attr_writer :login
 
   def on_jwt_dispatch(token, _payload)
     @token = token
+  end
+
+  def initials
+    first_name[0, 1]
+  end
+
+  def login
+    @login || username || email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_h)
+        .where(['lower(username) = :value OR lower(email) = :value', { value: login.downcase }])
+        .first
+    elsif conditions.key?(:username) || conditions.key?(:email)
+      where(conditions.to_h).first
+    end
   end
 end

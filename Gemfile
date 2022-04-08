@@ -63,6 +63,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  # Debuging
   gem 'pry', '~> 0.14.1'
 end
 
@@ -74,10 +75,12 @@ group :test do
 end
 
 # Security & Auth
+gem 'cancancan'
 gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'rack-cors'
+gem 'rolify'
 
 # Rails Admin Library
 gem 'sass-rails'
@@ -92,7 +95,11 @@ gem 'rubocop', '~> 1.26', require: false
 
 # File Uploader
 gem 'carrierwave', '~> 2.0'
+gem 'fog-aws'
 gem 'mini_magick'
 
 # Enum
 gem 'enumerize'
+
+# Pagination
+gem 'kaminari'

@@ -38,6 +38,7 @@ Trestle.resource(:account, model: User, scope: Auth, singular: true) do
 
   # Limit the parameters that are permitted to be updated by the user
   params do |params|
-    params.require(:account).permit(:email, :password, :password_confirmation)
+    params.require(:account)
+          .permit(:username, :email, :password, :password_confirmation, :first_name, :last_name)
   end
 end

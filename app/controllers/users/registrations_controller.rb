@@ -9,7 +9,15 @@ module Users
     end
 
     def register_success
-      render json: { message: 'Signed up.' }, status: :ok
+      render json: {
+        success: true,
+        message: 'Register success.',
+        id: current_user.id,
+        email: current_user.email,
+        first_name: current_user.first_name,
+        'token-type': 'Bearer',
+        'access-token': current_user.token
+      }, status: :ok
     end
 
     def register_failed
