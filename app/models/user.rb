@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify before_add: :delete_previous_role
   extend Enumerize
 
   # Include default devise modules. Others available are:
@@ -19,6 +20,8 @@ class User < ApplicationRecord
 
   attr_reader :token
   attr_writer :login
+
+  after_create :assign_default_role
 
   def on_jwt_dispatch(token, _payload)
     @token = token
@@ -41,5 +44,37 @@ class User < ApplicationRecord
     elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def admin?
+    has_role?(:admin)
+  end
+
+  def user?
+    has_role?(:user)
+  end
+
+  def author?
+    has_role?(:author)
+  end
+
+  def mentor?
+    has_role?(:mentor)
+  end
+
+  def user_pro?
+    user_type == 'pro'
+  end
+
+  private
+
+  def assign_default_role
+    add_role(:user) if roles.blank?
+  end
+
+  def delete_previous_role(assigned_role)
+    return if roles.pluck(:name).include?(assigned_role.name)
+
+    roles.delete(roles.where(id: roles.ids))
   end
 end

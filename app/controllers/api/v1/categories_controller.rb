@@ -3,6 +3,7 @@ module Api
     class CategoriesController < ApiController
       before_action :authenticate_user!
       before_action :set_category, only: %i[show update destroy]
+      load_and_authorize_resource
 
       def index
         category = Category.all
@@ -59,10 +60,6 @@ module Api
 
       def set_category
         @category = Category.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        render json: {
-          messages: I18n.t('activerecord.errors.messages.not_found', model: Category.model_name.human)
-        }, status: :not_found
       end
 
       def category_params

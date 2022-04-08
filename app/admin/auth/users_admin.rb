@@ -6,12 +6,15 @@ Trestle.resource(:users, model: User, scope: Auth) do
   end
 
   table do
-    column :avatar, header: false, class: "poster-column" do |user|
+    column :avatar, class: "poster-column" do |user|
       admin_link_to(image_tag(user.avatar_url(:thumb), class: "poster"), user) if user.avatar.present?
     end
     column :email, link: true
     column :first_name
     column :last_name
+    column :roles, format: :tags, class: "hidden-xs" do |user|
+      user.roles.map(&:name)
+    end
     actions do |a|
       a.delete unless a.instance == current_user
     end
@@ -22,6 +25,7 @@ Trestle.resource(:users, model: User, scope: Auth) do
     text_field :username
     file_field :avatar
     text_field :phone_number
+    select :role_ids, Role.all, { label: "Roles" }
 
     row do 
       col(sm: 6) { text_field :first_name }

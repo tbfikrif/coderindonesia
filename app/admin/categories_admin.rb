@@ -1,19 +1,16 @@
 Trestle.resource(:categories) do
   menu do
-    item :categories, icon: 'fa fa-star'
+    item :categories, icon: 'fa fa-list'
   end
 
-  # Customize the table columns shown on the index view.
-  #
   table do
+    column :id
     column :name
     column :description
     actions
   end
 
-  # Customize the form fields shown on the new/edit views.
-  #
-  form do |_category|
+  form dialog: true do |category|
     text_field :name
     text_field :description
   end
