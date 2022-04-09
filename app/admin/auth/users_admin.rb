@@ -25,7 +25,7 @@ Trestle.resource(:users, model: User, scope: Auth) do
     text_field :username
     file_field :avatar
     text_field :phone_number
-    select :role_ids, Role.all, { label: "Roles" }
+    select :role_ids, Role.all, { label: "Role" }
 
     row do 
       col(sm: 6) { text_field :first_name }

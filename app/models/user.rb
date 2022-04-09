@@ -21,6 +21,8 @@ class User < ApplicationRecord
   attr_reader :token
   attr_writer :login
 
+  has_many :articles
+
   after_create :assign_default_role
 
   def on_jwt_dispatch(token, _payload)

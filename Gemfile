@@ -88,7 +88,8 @@ gem 'trestle'
 gem 'trestle-auth'
 
 # API
-gem 'jsonapi-serializer'
+gem 'jsonapi.rb'
+gem 'ransack'
 
 # Code Linter
 gem 'rubocop', '~> 1.26', require: false
