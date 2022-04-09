@@ -3,8 +3,18 @@ class ApiController < ActionController::Base
   include JSONAPI::Filtering
   include JSONAPI::Pagination
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: { errors: exception.message }, status: :forbidden
+  rescue_from CanCan::AccessDenied do |_exception|
+    render json: {
+      errors: [
+        status: 403,
+        source: {
+          pointer: params[:controller]
+        },
+        title: 'Forbidden',
+        detail: I18n.t('unauthorized.invalid_access'),
+        code: 'forbidden'
+      ]
+    }, status: :forbidden
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
