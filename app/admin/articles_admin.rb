@@ -17,7 +17,7 @@ Trestle.resource(:articles) do
 
   form do |article|
     text_field :title
-    text_area :description
+    editor :description
     file_field :image
 
     row do

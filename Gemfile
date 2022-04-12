@@ -86,6 +86,7 @@ gem 'rolify'
 gem 'sass-rails'
 gem 'trestle'
 gem 'trestle-auth'
+gem 'trestle-simplemde'
 
 # API
 gem 'jsonapi.rb'

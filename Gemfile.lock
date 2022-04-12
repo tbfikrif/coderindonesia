@@ -321,6 +321,8 @@ GEM
     trestle-auth (0.4.3)
       bcrypt (~> 3.1.7)
       trestle (~> 0.9.0, >= 0.9.3)
+    trestle-simplemde (0.1.2)
+      trestle (~> 0.8, >= 0.8.6)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -383,6 +385,7 @@ DEPENDENCIES
   stimulus-rails
   trestle
   trestle-auth
+  trestle-simplemde
   turbo-rails
   tzinfo-data
   web-console
