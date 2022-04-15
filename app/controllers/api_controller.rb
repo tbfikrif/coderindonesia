@@ -57,6 +57,8 @@ class ApiController < ActionController::Base
   end
 
   def jsonapi_meta(resources)
-    { total: resources.count } if resources.respond_to?(:count)
+    pagination = jsonapi_pagination_meta(resources)
+
+    { pagination: } if pagination.present?
   end
 end

@@ -1,6 +1,8 @@
 Trestle.resource(:categories) do
   menu do
-    item :categories, icon: 'fa fa-list'
+    group :configuration do
+      item :categories, icon: 'fa fa-list'
+    end
   end
 
   table do

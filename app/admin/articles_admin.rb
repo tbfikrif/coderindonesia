@@ -5,8 +5,8 @@ Trestle.resource(:articles) do
 
   table do
     column :id
-    column :image, class: "poster-column" do |user|
-      admin_link_to(image_tag(user.image_url(:thumb), class: "poster"), user) if user.image.present?
+    column :image, class: "poster-column" do |article|
+      admin_link_to(image_tag(article.image_url(:thumb), class: "poster"), article) if article.image.present?
     end
     column :title
     column :description
@@ -21,7 +21,7 @@ Trestle.resource(:articles) do
     file_field :image
 
     row do
-      col(sm: 6) { select :author_id, User.all }
+      col(sm: 6) { select :author_id, User.with_any_role(:admin, :author) }
       col(sm: 6) { select :category_id, Category.all }
     end
   end
