@@ -15,7 +15,7 @@ class Ability
       # can :manage, Comment
       can :manage, Article if user.author?
       can :manage, Video if user.mentor?
-      # can :manage, Schedule if user.mentor?
+      can :manage, Schedule if user.mentor?
       cannot :read, [Category, Role, User]
     end
     #

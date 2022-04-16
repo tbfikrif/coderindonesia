@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :categories
       resources :articles
       resources :videos
+      resources :schedules
     end
   end
 end

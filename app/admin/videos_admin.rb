@@ -11,7 +11,9 @@ Trestle.resource(:videos) do
     column :title
     column :description
     column :video_link
-    column :video_type
+    column :video_type, sort: :video_type, align: :center do |video|
+      status_tag(video.video_type, { "free" => :success, "premium" => :danger }[video.video_type] || :default)
+    end
     column :mentor
     column :category
     actions

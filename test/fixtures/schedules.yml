@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  image: MyString
+  form_link: MyString
+  schedule_link: MyString
+  learning_tools: MyString
+  schedule_type: 1
+  status: 1
+  event_date: 2022-04-16 23:38:28
+  mentor: one
+  category: one
+
+two:
+  title: MyString
+  description: MyText
+  image: MyString
+  form_link: MyString
+  schedule_link: MyString
+  learning_tools: MyString
+  schedule_type: 1
+  status: 1
+  event_date: 2022-04-16 23:38:28
+  mentor: two
+  category: two

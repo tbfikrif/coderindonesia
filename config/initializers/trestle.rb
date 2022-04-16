@@ -154,7 +154,7 @@ Trestle.configure do |config|
   #
   config.auth.avatar = ->(current_user) {
     avatar(fallback: current_user.initials) do
-      image_tag(current_user.avatar_url, alt: current_user.initials) if current_user.avatar?
+      image_tag(current_user.avatar_url(:thumb), alt: current_user.initials) if current_user.avatar?
     end
   }
 
