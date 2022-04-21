@@ -53,7 +53,7 @@ module Api
         params.require(:schedule)
               .permit(
                 :title, :description, :image, :form_link, :schedule_link, :schedule_type,
-                :status, :event_date, :mentor_id, :category_id, learning_tools:[]
+                :status, :event_date, :mentor_id, :category_id, learning_tools: []
               )
       end
     end

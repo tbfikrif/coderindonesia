@@ -15,7 +15,7 @@ class Schedule < ApplicationRecord
   def learning_tools=(value)
     case value
     when Array
-      super(value.reject { |c| c.empty? })
+      super(value.reject(&:empty?))
     else
       super
     end

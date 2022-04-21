@@ -6,15 +6,7 @@ module Users
 
     def respond_with(_resource, _opts = {})
       if current_user
-        render json: {
-          message: I18n.t('devise.sessions.signed_in'),
-          id: current_user.id,
-          email: current_user.email,
-          first_name: current_user.first_name,
-          user_type: current_user.user_type.text,
-          'token-type': 'Bearer',
-          'access-token': current_user.token
-        }, status: :ok
+        render_jsonapi_response(current_user)
       else
         render json: {
           message: I18n.t('devise.failure.invalid', authentication_keys: 'username/email')
