@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def jsonapi_meta(resources)
-    if resources.token.present?
-      {
-        'token-type': 'Bearer',
-        'access-token': resources.token
-      }
-    end
+    return unless resources.token.present?
+
+    {
+      'token-type': 'Bearer',
+      'access-token': resources.token
+    }
   end
 end

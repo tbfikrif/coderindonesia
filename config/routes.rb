@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :articles
       resources :videos
       resources :schedules
+      get '/dashboards', to: 'dashboards#list'
     end
   end
 end
